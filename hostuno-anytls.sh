@@ -21,7 +21,11 @@ CONFIG_FILE="$SCRIPT_DIR/config.json"
 LOG_FILE="$SCRIPT_DIR/anytls.log"
 PID_FILE="$SCRIPT_DIR/anytls.pid"
 BINARY_NAME="anytls-server"
+# ANYTLS 官方下载链接（保持最新）
 DOWNLOAD_URL="https://github.com/XTLS/ANYTLS/releases/latest/download"
+
+# 如果官方链接失效，可以使用备用链接
+BACKUP_DOWNLOAD_URL="https://raw.githubusercontent.com/dingning789/hostuno-anytls-script/main/backup"
 
 # 打印带颜色的消息
 print_message() {
