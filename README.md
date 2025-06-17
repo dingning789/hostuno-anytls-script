@@ -1,134 +1,154 @@
-# EDtunnel
+# Hostuno 共享主机 ANYTLS 一键部署脚本
 
-<p align="center">
-  <img src="https://cloudflare-ipfs.com/ipfs/bafybeigd6i5aavwpr6wvnwuyayklq3omonggta4x2q7kpmgafj357nkcky" alt="edgetunnel" style="margin-bottom: -50px;">
-</p>
+🚀 专为 Hostuno 共享主机优化的 ANYTLS 代理服务器一键部署脚本，支持最新协议和特性。
 
-GitHub Repository for [https://github.com/zizifn/edgetunnel](https://github.com/zizifn/edgetunnel)
+## ✨ 特色功能
 
-ask question and cloudflare ips: [https://t.me/edtunnel](https://t.me/edtunnel)
+- 🎯 **共享主机优化** - 专门适配共享主机环境限制
+- 🔐 **最新协议支持** - Reality TLS + WebSocket + H2Mux
+- 🤖 **全自动部署** - 一键安装，无需手动配置
+- 🌐 **多架构支持** - x86_64, ARM64, ARMv7
+- 📊 **完整管理** - 启动/停止/重启/状态监控
+- 🔧 **智能配置** - 自动生成随机端口、UUID、路径
 
-[![Repository](https://img.shields.io/badge/View%20on-GitHub-blue.svg)](https://github.com/zizifn/edgetunnel)
+## 🛠️ 支持的协议
 
-## available branches and explain
+- **ANYTLS** - 最新版本
+- **Reality TLS** - 真实 TLS 指纹伪装
+- **WebSocket** - HTTP 升级传输
+- **XTLS-RPRX-Vision** - 高性能流控
+- **H2Mux** - HTTP2 多路复用
 
-| Branch Name   | Description                                                   |
-| ------------- | ------------------------------------------------------------- |
-| remote-socks5 | Branch for remote SOCKS5 proxy pool used implementation       |
-| socks5        | Branch for SOCKS5 proxyIP implementation                      |
-| vless         | Branch for outbound VLESS protocol implementation             |
-| vless2        | Branch for alternative outbound VLESS protocol implementation |
-| code1         | Branch for code1 feature development                          |
-| code2         | Branch for code2 alternative feature development              |
-| dns           | Branch for DNS alternative related development                |
-| main          | Main branch for the project                                   |
-| pages         | New version for deployment on Cloudflare Pages                |
+## 🚀 快速开始
 
-## Deploy in pages.dev
+### 一键安装运行
 
-1. See YouTube Video:
-
-   [https://www.youtube.com/watch?v=8I-yTNHB0aw](https://www.youtube.com/watch?v=8I-yTNHB0aw)
-
-2. Clone this repository deploy in cloudflare pages.
-
-## Deploy in worker.dev
-
-1. Copy `_worker.js` code from [here](https://github.com/3Kmfi6HP/EDtunnel/blob/main/_worker.js).
-
-2. Alternatively, you can click the button below to deploy directly.
-
-   [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/3Kmfi6HP/EDtunnel)
-
-## Lazy to deploy
-
-`aHR0cHM6Ly9vc3MudjJyYXlzZS5jb20vcHJveGllcy9kYXRhLzIwMjMtMDctMzAvRnJFS1lvQS50eHQ=` (free clash.meta subscribe config)
-
-## UUID Setting (Optional)
-
-1. When deploy in cloudflare pages, you can set uuid in `wrangler.toml` file. variable name is `UUID`. `wrangler.toml` file is also supported. (recommended) in case deploy in webpages, you can not set uuid in `wrangler.toml` file.
-
-2. When deploy in worker.dev, you can set uuid in `_worker.js` file. variable name is `userID`. `wrangler.toml` file is also supported. (recommended) in case deploy in webpages, you can not set uuid in `wrangler.toml` file. in this case, you can also set uuid in `UUID` enviroment variable.
-
-Note: `UUID` is the uuid you want to set. pages.dev and worker.dev all of them method supported, but depend on your deploy method.
-
-### UUID Setting Example
-
-1. single uuid environment variable
-
-   ```.environment
-   UUID = "uuid here your want to set"
-   ```
-
-2. multiple uuid environment variable
-
-   ```.environment
-   UUID = "uuid1,uuid2,uuid3"
-   ```
-
-   note: uuid1, uuid2, uuid3 are separated by commas`,`.
-   when you set multiple uuid, you can use `https://edtunnel.pages.dev/uuid1` to get the clash config and vless:// link.
-
-## subscribe vless:// link (Optional)
-
-1. visit `https://edtunnel.pages.dev/uuid your set` to get the subscribe link.
-
-2. visit `https://edtunnel.pages.dev/sub/uuid your set` to get the subscribe content with `uuid your set` path.
-
-   note: `uuid your set` is the uuid you set in UUID enviroment or `wrangler.toml`, `_worker.js` file.
-   when you set multiple uuid, you can use `https://edtunnel.pages.dev/sub/uuid1` to get the subscribe content with `uuid1` path.(only support first uuid in multiple uuid set)
-
-3. visit `https://edtunnel.pages.dev/sub/uuid your set/?format=clash` to get the subscribe content with `uuid your set` path and `clash` format. content will return with base64 encode.
-
-   note: `uuid your set` is the uuid you set in UUID enviroment or `wrangler.toml`, `_worker.js` file.
-   when you set multiple uuid, you can will use `https://edtunnel.pages.dev/sub/uuid1/?format=clash` to get the subscribe content with `uuid1` path and `clash` format.(only support first uuid in multiple uuid set)
-
-## subscribe Cloudflare bestip(pure ip) link
-
-1. visit `https://edtunnel.pages.dev/bestip/uuid your set` to get subscribe info.
-
-2. cpoy subscribe url link `https://edtunnel.pages.dev/bestip/uuid your set` to any clients(clash/v2rayN/v2rayNG) you want to use.
-
-3. done. if have any questions please join [@edtunnel](https://t.me/edtunnel)
-
-## multiple port support (Optional)
-
-   <!-- let portArray_http = [80, 8080, 8880, 2052, 2086, 2095];
-	let portArray_https = [443, 8443, 2053, 2096, 2087, 2083]; -->
-
-For a list of Cloudflare supported ports, please refer to the [official documentation](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/ports).
-
-By default, the port is 80 and 443. If you want to add more ports, you can use the following ports:
-
-```text
-80, 8080, 8880, 2052, 2086, 2095, 443, 8443, 2053, 2096, 2087, 2083
-http port: 80, 8080, 8880, 2052, 2086, 2095
-https port: 443, 8443, 2053, 2096, 2087, 2083
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/你的用户名/hostuno-anytls-script/main/hostuno-anytls.sh)
 ```
 
-if you deploy in cloudflare pages, https port is not supported. Simply add multiple ports node drictly use subscribe link, subscribe content will return all Cloudflare supported ports.
+### 下载后运行
 
-## proxyIP (Optional)
+```bash
+# 下载脚本
+wget https://raw.githubusercontent.com/你的用户名/hostuno-anytls-script/main/hostuno-anytls.sh
 
-1. When deploy in cloudflare pages, you can set proxyIP in `wrangler.toml` file. variable name is `PROXYIP`.
+# 赋予执行权限
+chmod +x hostuno-anytls.sh
 
-2. When deploy in worker.dev, you can set proxyIP in `_worker.js` file. variable name is `proxyIP`.
+# 运行脚本
+./hostuno-anytls.sh
+```
 
-note: `proxyIP` is the ip or domain you want to set. this means that the proxyIP is used to route traffic through a proxy rather than directly to a website that is using Cloudflare's (CDN). if you don't set this variable, connection to the Cloudflare IP will be cancelled (or blocked)...
+## 📋 使用说明
 
-resons: Outbound TCP sockets to Cloudflare IP ranges are temporarily blocked, please refer to the [tcp-sockets documentation](https://developers.cloudflare.com/workers/runtime-apis/tcp-sockets/#considerations)
+### 交互式菜单
 
-## Usage
+直接运行脚本会显示交互式菜单：
 
-frist, open your pages.dev domain `https://edtunnel.pages.dev/` in your browser, then you can see the following page:
-The path `/uuid your seetting` to get the clash config and vless:// link.
+```
+========================================
+    Hostuno 共享主机 ANYTLS 部署脚本
+========================================
 
-## Star History
+1. 安装 ANYTLS
+2. 启动服务
+3. 停止服务
+4. 重启服务
+5. 查看状态
+6. 查看日志
+7. 显示连接信息
+8. 卸载
+0. 退出
+```
 
-<a href="https://star-history.com/#6Kmfi6HP/EDtunnel&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=6Kmfi6HP/EDtunnel&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=6Kmfi6HP/EDtunnel&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=6Kmfi6HP/EDtunnel&type=Date" />
-  </picture>
-</a>
+### 命令行参数
+
+```bash
+./hostuno-anytls.sh install    # 安装并启动服务
+./hostuno-anytls.sh start      # 启动服务
+./hostuno-anytls.sh stop       # 停止服务
+./hostuno-anytls.sh restart    # 重启服务
+./hostuno-anytls.sh status     # 查看运行状态
+./hostuno-anytls.sh logs       # 查看运行日志
+./hostuno-anytls.sh info       # 显示连接信息
+./hostuno-anytls.sh uninstall  # 完全卸载
+```
+
+## 🖥️ 系统要求
+
+- **操作系统**: Linux (CentOS, Ubuntu, Debian 等)
+- **架构**: x86_64, ARM64, ARMv7
+- **主机类型**: 共享主机、VPS、独立服务器
+- **网络**: 需要访问外网下载程序
+- **权限**: 用户目录写入权限
+
+## 📁 安装目录结构
+
+```
+~/anytls-proxy/
+├── anytls-server          # ANYTLS 服务器程序
+├── config.json           # 服务器配置文件
+├── anytls.log            # 运行日志
+├── anytls.pid            # 进程 ID 文件
+└── connection_info.txt   # 连接信息
+```
+
+## 🔧 配置说明
+
+脚本会自动生成以下配置：
+
+- **监听端口**: 随机生成 (10000-65535)
+- **用户 UUID**: 自动生成唯一标识
+- **传输路径**: 随机 8 位字符路径
+- **TLS 域名**: 自动获取主机域名
+- **Reality 配置**: 伪装目标 www.google.com
+
+## 📱 客户端配置
+
+安装完成后，脚本会自动生成客户端配置信息，保存在 `connection_info.txt` 文件中。
+
+### 支持的客户端
+
+- **V2rayN** (Windows)
+- **V2rayNG** (Android)  
+- **Shadowrocket** (iOS)
+- **Clash** 系列客户端
+- **sing-box** 客户端
+
+## 🔍 常见问题
+
+### Q: 安装失败怎么办？
+A: 检查网络连接和权限，确保可以访问 GitHub 和下载文件。
+
+### Q: 服务启动失败？
+A: 查看日志 `./hostuno-anytls.sh logs`，通常是端口被占用或权限问题。
+
+### Q: 无法连接？
+A: 确认防火墙设置，检查端口是否开放，验证客户端配置。
+
+### Q: 共享主机限制？
+A: 脚本已优化共享主机环境，自动适配端口和资源限制。
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 📄 许可证
+
+本项目采用 [MIT 许可证](LICENSE)。
+
+## ⚠️ 免责声明
+
+本脚本仅供学习和研究使用，请遵守当地法律法规。使用本脚本所产生的任何后果由使用者自行承担。
+
+## 📞 支持
+
+如有问题，请通过以下方式联系：
+
+- 提交 [GitHub Issue](https://github.com/你的用户名/hostuno-anytls-script/issues)
+- 发送邮件: your-email@example.com
+
+---
+
+⭐ 如果这个项目对您有帮助，请给一个 Star！
